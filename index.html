@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Official website for Crosskeys Silver Band, a historic Welsh brass band based in Crosskeys, South Wales. Find rehearsals, booking details, and player vacancies.">
+  <title>Crosskeys Silver Band | Historic South Wales Brass Band</title>
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Header & Navigation -->
+  <header id="main-header">
+    <div class="nav-container">
+      <a href="index.html" class="logo-wrapper" id="nav-logo-link">
+        <img src="Media/logo.png" alt="Crosskeys Silver Band Logo" class="logo-img">
+        <span class="logo-text brand-font">Crosskeys<span class="logo-sub accent-text">Silver Band</span></span>
+      </a>
+      
+      <button class="nav-toggle" aria-label="Toggle Navigation" id="mobile-menu-btn">
+        <span class="hamburger"></span>
+      </button>
+      
+      <nav class="nav-links" id="navigation-bar">
+        <a href="#about" class="nav-item">About Us</a>
+        <a href="#conductor" class="nav-item">Musical Director</a>
+        <a href="#vacancies" class="nav-item">Vacancies</a>
+        <a href="#rehearsals" class="nav-item">Rehearsals</a>
+        <a href="#contact" class="nav-item">Contact</a>
+        <a href="policies.html" class="nav-item">Policies</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-logo-glow"></div>
+    
+    <div class="hero-content">
+      <span class="hero-pre reveal">Established 1901</span>
+      <h1 class="hero-title reveal">Making Music in South Wales for over a Century</h1>
+      <p class="hero-desc reveal">Crosskeys Silver Band is a historic, community-focused brass band dedicated to musical excellence, performance, and preserving our Welsh brass heritage.</p>
+      <div class="hero-btns reveal">
+        <a href="#rehearsals" class="btn btn-primary" id="hero-btn-rehearsals">Join A Rehearsal</a>
+        <a href="#contact" class="btn btn-outline" id="hero-btn-contact">Book the Band</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="container" id="about">
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <h2 class="section-title">Our Story</h2>
+        <p class="section-subtitle" style="margin-left: 0; text-align: left;">From local roots to the national stage.</p>
+        <p>Founded in 1901 in the heart of the Western Valley of Monmouthshire, Crosskeys Silver Band has been a vital musical pillar of our local community for more than 125 years. Rooted in the rich industrial history of South Wales, the band initially brought together local coal miners and workers, establishing a tradition of camaraderie and artistic expression that continues to this day.</p>
+        <p>Today, we are a modern, forward-looking contesting band. We perform a wide range of repertoire, from traditional brass band marches and classical arrangements to contemporary concert items and film scores. We take pride in representing our region at Welsh contesting finals and community events alike.</p>
+        <p>Whether performing at local bandstands, concert halls, or competing on stage, Crosskeys Silver Band remains committed to delivering premium musical experiences and mentoring the next generation of brass instrumentalists.</p>
+      </div>
+      
+      <div class="about-highlights reveal">
+        <div class="highlight-box">
+          <span class="highlight-number">1901</span>
+          <span class="highlight-label">Founded</span>
+        </div>
+        <div class="highlight-box">
+          <span class="highlight-number">25+</span>
+          <span class="highlight-label">Active Players</span>
+        </div>
+        <div class="highlight-box">
+          <span class="highlight-number">100%</span>
+          <span class="highlight-label">Community Focused</span>
+        </div>
+        <div class="highlight-box">
+          <span class="highlight-number">120+</span>
+          <span class="highlight-label">Years of Music</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Conductor Section -->
+  <section class="conductor-bg" id="conductor">
+    <div class="container">
+      <div class="conductor-grid">
+        <div class="conductor-img-container reveal">
+          <div class="conductor-deco-border"></div>
+          <div class="conductor-frame">
+            <img src="Media/conductor.jpg" alt="Dave Collins - Musical Director of Crosskeys Silver Band">
+          </div>
+        </div>
+        
+        <div class="conductor-bio reveal">
+          <h2 class="section-title" style="margin-left: 0; text-align: left;">The Conductor</h2>
+          <span class="conductor-role">Dave Collins — Musical Director</span>
+          <div class="conductor-bio-text">
+            <p>Dave Collins is a first-class honors graduate in Music from Grey College, University of Durham, and holds a Masters in Musical Composition with distinction from Salford University. He is an accomplished conductor, orchestrator, and composer whose brass band works are performed globally by elite ensembles such as the Cory Band, the GUS Band, and the Carlton Main Colliery Band.</p>
+            <p>During his studies, Dave specialized in acoustical and electronic composition and trained under renowned brass figures including Ray Farr (Conducting and Arranging), Bennet Zon (Orchestration), and Huw Thomas (Conducting and Trumpet Performance). Outside of directing the Crosskeys Silver Band, he works in professional orchestral management.</p>
+            <p>Dave brings a rich combination of artistic caliber and structured training, maintaining the band's historic standards of excellence while introducing exciting and challenging repertoire to our rehearsal room.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vacancies Section -->
+  <section class="container" id="vacancies">
+    <div class="text-center reveal">
+      <h2 class="section-title">Join The Band</h2>
+      <p class="section-subtitle">We are always happy to hear from friendly, committed musicians. Explore our current player vacancies below.</p>
+    </div>
+    
+    <div class="vacancies-grid" id="vacancies-list">
+      <!-- Dynamic Vacancies Loaded via JS -->
+      <div class="text-center" style="grid-column: 1/-1; padding: 2rem;">
+        <i class="fas fa-spinner fa-spin" style="font-size: 2rem; color: var(--color-gold);"></i>
+        <p style="margin-top: 1rem; color: var(--text-secondary);">Loading current vacancies...</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rehearsals & Map Section -->
+  <section class="rehearsal-bg" id="rehearsals">
+    <div class="container rehearsal-grid">
+      <div class="rehearsal-info reveal">
+        <h2 class="section-title" style="margin-left: 0; text-align: left;">Rehearsals</h2>
+        <p class="section-subtitle" style="margin-left: 0; text-align: left;">Come along to hear us play or join in.</p>
+        
+        <div class="rehearsal-time-card">
+          <h3>Rehearsal Times</h3>
+          <div class="time-item">
+            <span class="time-day">Tuesday</span>
+            <span class="time-hours">19:30 - 21:30</span>
+          </div>
+        </div>
+
+        <div class="rehearsal-location-card">
+          <h3>Location</h3>
+          <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+            <strong>Pandy Park (Crosskeys RFC)</strong><br>
+            Woodward Ave, Crosskeys,<br>
+            Newport, NP11 7PU
+          </p>
+          <p style="font-size: 0.95rem; color: var(--text-secondary);">
+            Our rehearsals take place in the dedicated bandroom at Pandy Park. Ample free parking is available on-site.
+          </p>
+        </div>
+      </div>
+      
+      <div class="map-wrapper reveal">
+        <!-- Google Map iframe centered on Crosskeys Silver Bandroom -->
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2477.139326256424!2d-3.1297874!3d51.6206569!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x486e1fea07e3df35%3A0xa706ca215bfa90cd!2sCross+Keys+Silver+Band!5e0!3m2!1sen!2suk!4v1719600000000!5m2!1sen!2suk" 
+          width="600" 
+          height="450" 
+          allowfullscreen="" 
+          loading="lazy" 
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Google Maps Location of Crosskeys Silver Bandroom">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact & Bookings -->
+  <section class="container" id="contact">
+    <div class="contact-grid">
+      <div class="contact-details reveal">
+        <div>
+          <h2 class="section-title" style="margin-left: 0; text-align: left;">Get In Touch</h2>
+          <p class="section-subtitle" style="margin-left: 0; text-align: left;">We would love to hear from you, whether you want to book the band, enquire about joining, or ask a question.</p>
+        </div>
+        
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+          <div class="contact-item-content">
+            <h4>Email Us</h4>
+            <p><a href="#" class="decode-email" data-user="secretary" data-domain="crosskeysband.co.uk">secretary [at] crosskeysband.co.uk</a></p>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fas fa-location-dot"></i></div>
+          <div class="contact-item-content">
+            <h4>Find Us</h4>
+            <p>Pandy Park, Woodward Ave, Crosskeys, NP11 7PU</p>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fab fa-facebook-f"></i></div>
+          <div class="contact-item-content">
+            <h4>Facebook Page</h4>
+            <p><a href="https://www.facebook.com/CrosskeysSilverBand" target="_blank" rel="noopener">facebook.com/CrosskeysSilverBand</a></p>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fab fa-youtube"></i></div>
+          <div class="contact-item-content">
+            <h4>YouTube Channel</h4>
+            <p><a href="https://www.youtube.com/CrossKeysSilverBand" target="_blank" rel="noopener">youtube.com/CrossKeysSilverBand</a></p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="glass-card contact-form reveal">
+        <form id="contact-form">
+          <div class="form-group">
+            <label for="name">Your Name *</label>
+            <input type="text" id="name" class="form-control" placeholder="e.g. John Evans" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="email">Email Address *</label>
+            <input type="email" id="email" class="form-control" placeholder="e.g. john@example.com" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" class="form-control" placeholder="e.g. Booking Enquiry / Player vacancy">
+          </div>
+          
+          <div class="form-group">
+            <label for="message">Message *</label>
+            <textarea id="message" class="form-control" placeholder="Your message here..." required></textarea>
+          </div>
+          
+          <button type="submit" class="btn btn-primary" style="width: 100%;" id="contact-submit-btn">Send Message</button>
+          
+          <div id="form-status" class="form-status"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="main-footer">
+    <div class="container" style="padding: 0 0 30px 0;">
+      <div class="footer-grid">
+        <div class="footer-info">
+          <h4 class="brand-font">Crosskeys<br><span class="accent-text">Silver Band</span></h4>
+          <p>A community brass band in South Wales, rehearsing Tuesdays at Pandy Park.</p>
+          <div class="social-links">
+            <a href="https://www.facebook.com/CrosskeysSilverBand" target="_blank" rel="noopener" class="social-btn" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.youtube.com/CrossKeysSilverBand" target="_blank" rel="noopener" class="social-btn" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="social-btn decode-email" data-user="secretary" data-domain="crosskeysband.co.uk" aria-label="Email"><i class="fas fa-envelope"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#about">Our Story</a></li>
+            <li><a href="#conductor">Musical Director</a></li>
+            <li><a href="#vacancies">Vacancies</a></li>
+            <li><a href="#rehearsals">Rehearsals</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links">
+          <h4>Information</h4>
+          <ul>
+            <li><a href="policies.html">Policies & Governance</a></li>
+            <li><a href="#contact">Bookings & Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2026 Crosskeys Silver Band. All rights reserved. Registered Charity in England & Wales.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Committee admin console to manage vacancies for Crosskeys Silver Band.">
+  <title>Vacancies Admin | Crosskeys Silver Band</title>
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  
+  <style>
+    /* Admin-specific layout tweaks */
+    .admin-container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 40px 0 80px 0;
+    }
+    
+    .panel-header {
+      border-bottom: 1px solid var(--border-glass);
+      padding-bottom: 1rem;
+      margin-bottom: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .file-input-wrapper {
+      position: relative;
+      display: inline-block;
+    }
+
+    .file-input-wrapper input[type="file"] {
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+
+    .info-bar {
+      grid-column: 1 / -1;
+      margin-bottom: 2rem;
+    }
+
+    .json-preview {
+      margin-top: 2rem;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--border-glass);
+      border-radius: 6px;
+      padding: 1.5rem;
+      font-family: monospace;
+      font-size: 0.85rem;
+      white-space: pre-wrap;
+      max-height: 250px;
+      overflow-y: auto;
+      color: #88c0d0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header & Navigation -->
+  <header class="scrolled" id="main-header">
+    <div class="nav-container">
+      <a href="index.html" class="logo-wrapper" id="nav-logo-link">
+        <img src="Media/logo.png" alt="Crosskeys Silver Band Logo" class="logo-img">
+        <span class="logo-text brand-font">Crosskeys<span class="logo-sub accent-text">Silver Band</span></span>
+      </a>
+      
+      <button class="nav-toggle" aria-label="Toggle Navigation" id="mobile-menu-btn">
+        <span class="hamburger"></span>
+      </button>
+      
+      <nav class="nav-links" id="navigation-bar">
+        <a href="index.html#about" class="nav-item">About Us</a>
+        <a href="index.html#conductor" class="nav-item">Musical Director</a>
+        <a href="index.html#vacancies" class="nav-item">Vacancies</a>
+        <a href="index.html#rehearsals" class="nav-item">Rehearsals</a>
+        <a href="index.html#contact" class="nav-item">Contact</a>
+        <a href="policies.html" class="nav-item">Policies</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Admin Hero Header -->
+  <section class="admin-hero">
+    <div class="container" style="padding: 0;">
+      <h1 class="accent-text" style="font-size: 3rem; margin-bottom: 1rem;">Vacancies Manager</h1>
+      <p class="section-subtitle" style="margin-bottom: 0;">Modify the current vacancies list, download the new data file, and upload it to the website server.</p>
+    </div>
+  </section>
+
+  <!-- Main Panel -->
+  <main class="container admin-container">
+    
+    <div class="panel-header">
+      <div>
+        <h2>Active Listings</h2>
+        <p style="color: var(--text-secondary); font-size: 0.95rem;">Manage the vacancies in memory. Download the file when finished.</p>
+      </div>
+      
+      <div style="display: flex; gap: 1rem;">
+        <div class="file-input-wrapper">
+          <button class="btn btn-outline" id="import-btn"><i class="fas fa-file-import"></i> Import vacancies.json</button>
+          <input type="file" id="import-file-picker" accept=".json">
+        </div>
+        <button class="btn btn-primary" id="download-btn"><i class="fas fa-file-arrow-down"></i> Download vacancies.json</button>
+      </div>
+    </div>
+
+    <!-- Instruction Bar -->
+    <div class="glass-card info-bar" style="background: rgba(255, 215, 0, 0.02); border-color: rgba(255, 215, 0, 0.15);">
+      <h3 style="color: var(--color-gold); font-size: 1.1rem; margin-bottom: 0.5rem;"><i class="fas fa-circle-question"></i> How to use this tool:</h3>
+      <ol style="margin-left: 1.5rem; font-size: 0.95rem; color: var(--text-secondary); display: flex; flex-direction: column; gap: 0.5rem;">
+        <li>This tool will try to pre-load active vacancies from the website (if hosted). You can also click <strong>Import vacancies.json</strong> to select your current file locally.</li>
+        <li>Use the <strong>Vacancy Editor</strong> form below to add a new listing or modify an existing one.</li>
+        <li>Click <strong>Download vacancies.json</strong> and save the file in your website's <code>data/</code> folder, overwriting the old one. Upload the new file to your web server to make the changes live!</li>
+      </ol>
+    </div>
+
+    <div class="admin-grid">
+      <!-- Editor Form -->
+      <div class="glass-card">
+        <h3 style="margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-glass); padding-bottom: 0.5rem;" id="form-title">Add New Vacancy</h3>
+        
+        <form id="vacancy-form">
+          <input type="hidden" id="vacancy-id" value="">
+          
+          <div class="form-group">
+            <label for="instrument">Instrument Name *</label>
+            <input type="text" id="instrument" class="form-control" placeholder="e.g. Solo Cornet, Eb Bass, Percussion" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="section">Section *</label>
+            <select id="section" class="form-control" style="background: var(--bg-secondary); border: 1px solid var(--border-glass); color: var(--text-primary); cursor: pointer;" required>
+              <option value="Cornets">Cornets</option>
+              <option value="Horns">Horns (Tenor Horn / Flugel)</option>
+              <option value="Baritones & Euphoniums">Baritones & Euphoniums</option>
+              <option value="Trombones">Trombones</option>
+              <option value="Basses">Basses (Eb / Bb Bass)</option>
+              <option value="Percussion">Percussion</option>
+              <option value="Musical Director">Musical Director</option>
+              <option value="General">General / Other</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="date-added">Date Added *</label>
+            <input type="date" id="date-added" class="form-control" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="description">Job Description / Requirements *</label>
+            <textarea id="description" class="form-control" placeholder="Describe the vacancy, rehearsal days, and what you are looking for..." style="min-height: 120px;" required></textarea>
+          </div>
+          
+          <div style="display: flex; gap: 1rem;">
+            <button type="submit" class="btn btn-primary" style="flex-grow: 1;" id="save-btn">Add Vacancy</button>
+            <button type="button" class="btn btn-outline" style="display: none;" id="cancel-edit-btn">Cancel Edit</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Current List in Memory -->
+      <div>
+        <div class="admin-list-header">
+          <h3>Current Active Listings</h3>
+          <span class="vacancy-badge" id="listings-count">0 Listings</span>
+        </div>
+        
+        <div class="admin-vacancies-list" id="admin-listings-container">
+          <!-- Populated by JS -->
+          <div class="text-center" style="padding: 2rem; color: var(--text-secondary);">
+            No vacancies loaded. Start by adding one or importing a file!
+          </div>
+        </div>
+        
+        <!-- Live JSON text preview -->
+        <h3 style="margin-top: 3rem; margin-bottom: 0.5rem;"><i class="fas fa-code"></i> Live JSON Data Preview</h3>
+        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">This matches the file that will be downloaded.</p>
+        <div class="json-preview" id="json-preview-box">[]</div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer id="main-footer">
+    <div class="container" style="padding: 0 0 30px 0;">
+      <div class="footer-bottom" style="border: none; padding: 0;">
+        <p>&copy; 2026 Crosskeys Silver Band. All rights reserved. Registered Charity in England & Wales.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Admin logic script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      let vacancies = [];
+      let editMode = false;
+      
+      const vacancyForm = document.getElementById('vacancy-form');
+      const formTitle = document.getElementById('form-title');
+      const saveBtn = document.getElementById('save-btn');
+      const cancelEditBtn = document.getElementById('cancel-edit-btn');
+      
+      const formId = document.getElementById('vacancy-id');
+      const formInstrument = document.getElementById('instrument');
+      const formSection = document.getElementById('section');
+      const formDateAdded = document.getElementById('date-added');
+      const formDescription = document.getElementById('description');
+      
+      const listingsContainer = document.getElementById('admin-listings-container');
+      const listingsCount = document.getElementById('listings-count');
+      const jsonPreviewBox = document.getElementById('json-preview-box');
+      
+      const downloadBtn = document.getElementById('download-btn');
+      const importFilePicker = document.getElementById('import-file-picker');
+
+      // Set default date to today
+      const setTodayDate = () => {
+        const today = new Date().toISOString().split('T')[0];
+        formDateAdded.value = today;
+      };
+      setTodayDate();
+
+      // --- Try to pre-load vacancies from server ---
+      fetch('data/vacancies.json')
+        .then(res => {
+          if (res.ok) return res.json();
+          throw new Error('No vacancies.json found on server.');
+        })
+        .then(data => {
+          vacancies = data;
+          updateView();
+        })
+        .catch(err => {
+          console.log('No preloaded vacancies.json. Standing by for manual input or import.', err);
+        });
+
+      // --- Update View & Previews ---
+      function updateView() {
+        // Update count
+        listingsCount.innerText = `${vacancies.length} Listing${vacancies.length === 1 ? '' : 's'}`;
+        
+        // Update listings list
+        if (vacancies.length === 0) {
+          listingsContainer.innerHTML = `
+            <div class="text-center" style="padding: 3rem; background: var(--bg-secondary); border-radius: 8px; border: 1px dashed var(--border-glass); color: var(--text-secondary);">
+              <i class="fas fa-folder-open" style="font-size: 2.5rem; color: var(--border-glass-hover); margin-bottom: 1rem; display: block;"></i>
+              No active listings. Use the editor to add vacancies or import a vacancies.json file.
+            </div>
+          `;
+        } else {
+          listingsContainer.innerHTML = '';
+          vacancies.forEach((v, index) => {
+            const item = document.createElement('div');
+            item.className = 'admin-item';
+            item.innerHTML = `
+              <div class="admin-item-info">
+                <h4>${escapeHTML(v.instrument)}</h4>
+                <span>Section: <strong>${escapeHTML(v.section)}</strong> | Added: ${escapeHTML(v.dateAdded)}</span>
+              </div>
+              <div class="admin-item-actions">
+                <button class="btn-icon btn-edit" title="Edit Listing" data-index="${index}"><i class="fas fa-pen"></i></button>
+                <button class="btn-icon btn-delete" title="Delete Listing" data-index="${index}"><i class="fas fa-trash-can"></i></button>
+              </div>
+            `;
+            listingsContainer.appendChild(item);
+          });
+          
+          // Wire up actions
+          document.querySelectorAll('.btn-edit').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+              const idx = parseInt(e.currentTarget.getAttribute('data-index'));
+              startEdit(idx);
+            });
+          });
+          
+          document.querySelectorAll('.btn-delete').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+              const idx = parseInt(e.currentTarget.getAttribute('data-index'));
+              deleteListing(idx);
+            });
+          });
+        }
+        
+        // Update JSON preview
+        jsonPreviewBox.innerText = JSON.stringify(vacancies, null, 2);
+      }
+
+      // --- Add / Update Vacancy ---
+      vacancyForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const idVal = formId.value;
+        const vacancyData = {
+          instrument: formInstrument.value.trim(),
+          section: formSection.value,
+          dateAdded: formDateAdded.value,
+          description: formDescription.value.trim()
+        };
+
+        if (editMode && idVal !== '') {
+          // Edit existing
+          const idx = parseInt(idVal);
+          vacancies[idx] = vacancyData;
+          exitEditMode();
+        } else {
+          // Add new
+          vacancies.push(vacancyData);
+        }
+        
+        vacancyForm.reset();
+        setTodayDate();
+        updateView();
+      });
+
+      // --- Edit Actions ---
+      function startEdit(idx) {
+        const item = vacancies[idx];
+        formTitle.innerText = `Edit Vacancy: ${item.instrument}`;
+        saveBtn.innerText = 'Save Changes';
+        cancelEditBtn.style.display = 'inline-block';
+        editMode = true;
+        
+        formId.value = idx;
+        formInstrument.value = item.instrument;
+        formSection.value = item.section || 'General';
+        formDateAdded.value = item.dateAdded || '';
+        formDescription.value = item.description || '';
+        
+        // Scroll to editor
+        document.getElementById('vacancy-form').scrollIntoView({ behavior: 'smooth' });
+      }
+
+      cancelEditBtn.addEventListener('click', exitEditMode);
+
+      function exitEditMode() {
+        formTitle.innerText = 'Add New Vacancy';
+        saveBtn.innerText = 'Add Vacancy';
+        cancelEditBtn.style.display = 'none';
+        editMode = false;
+        formId.value = '';
+        vacancyForm.reset();
+        setTodayDate();
+      }
+
+      // --- Delete Action ---
+      function deleteListing(idx) {
+        if (confirm(`Are you sure you want to delete the vacancy for "${vacancies[idx].instrument}"?`)) {
+          if (editMode && parseInt(formId.value) === idx) {
+            exitEditMode();
+          }
+          vacancies.splice(idx, 1);
+          updateView();
+        }
+      }
+
+      // --- Download JSON File ---
+      downloadBtn.addEventListener('click', () => {
+        const dataStr = JSON.stringify(vacancies, null, 2);
+        const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+        
+        const exportFileDefaultName = 'vacancies.json';
+        
+        const linkElement = document.createElement('a');
+        linkElement.setAttribute('href', dataUri);
+        linkElement.setAttribute('download', exportFileDefaultName);
+        linkElement.click();
+      });
+
+      // --- Import JSON File ---
+      importFilePicker.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          try {
+            const data = JSON.parse(event.target.result);
+            if (Array.isArray(data)) {
+              vacancies = data;
+              updateView();
+              alert(`Successfully imported ${data.length} vacancies!`);
+            } else {
+              alert('Error: The file does not contain a valid vacancies array structure.');
+            }
+          } catch (err) {
+            alert('Error: Failed to parse JSON file.');
+            console.error(err);
+          }
+        };
+        reader.readAsText(file);
+      });
+
+      // --- Helper to escape HTML ---
+      function escapeHTML(str) {
+        if (!str) return '';
+        return str.replace(/[&<>'"]/g, 
+          tag => ({
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            "'": '&#39;',
+            '"': '&quot;'
+          }[tag] || tag)
+        );
+      }
+      
+      // Mobile hamburger toggle in header (local implementation for this page)
+      const navToggle = document.getElementById('mobile-menu-btn');
+      const navLinks = document.getElementById('navigation-bar');
+      if (navToggle && navLinks) {
+        navToggle.addEventListener('click', () => {
+          navToggle.classList.toggle('open');
+          navLinks.classList.toggle('open');
+        });
+      }
+    });
+  </script>
+</body>
+</html>
