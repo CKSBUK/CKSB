@@ -46,7 +46,7 @@ function crosskeys_enqueue_assets() {
         'crosskeys-main',
         get_template_directory_uri() . '/js/main.js',
         [],
-        '1.0.0',
+        filemtime( get_template_directory() . '/js/main.js' ),
         true // load in footer
     );
 
