@@ -47,7 +47,7 @@
       </div>
 
       <div class="footer-bottom">
-        <p>&copy; <?php echo date( 'Y' ); ?> Crosskeys Silver Band. All rights reserved. Registered Charity in England &amp; Wales.</p>
+        <p>&copy; <?php echo date( 'Y' ); ?> Crosskeys Silver Band. All rights reserved. Registered Charity in England &amp; Wales (<a href="https://register-of-charities.charitycommission.gov.uk/en/charity-search/-/charity-details/5014261?_uk_gov_ccew_onereg_charitydetails_web_portlet_CharityDetailsPortlet_organisationNumber=5014261" target="_blank" rel="noopener" style="color:inherit; text-decoration:underline;">1139417</a>).</p>
       </div>
     </div>
   </footer>
