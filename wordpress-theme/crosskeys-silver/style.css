@@ -671,13 +671,15 @@ header.scrolled .logo-img { height: 40px; }
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1rem;
   margin-bottom: 1.5rem;
 }
 
 .vacancy-instrument {
   font-size: 1.4rem;
   font-weight: 600;
-  margin-right: 10px;
+  margin-right: 0;
 }
 
 .vacancy-badge {
@@ -688,7 +690,8 @@ header.scrolled .logo-img { height: 40px; }
   border-radius: 30px;
   font-size: 0.8rem;
   font-weight: 600;
-  white-space: nowrap;
+  text-align: center;
+  max-width: 100%;
 }
 
 .vacancy-desc {
@@ -828,14 +831,16 @@ header.scrolled .logo-img { height: 40px; }
 
 .contact-item-content a:hover { color: var(--color-gold); }
 
-/* Contact Form 7 overrides */
+/* Form Plugin Overrides (CF7, Fluent Forms, WPForms) */
 .contact-form .form-group,
-.contact-form .wpcf7-form p {
+.contact-form .wpcf7-form p,
+.contact-form .ff-el-group {
   margin-bottom: 1.5rem;
 }
 
 .contact-form label,
-.contact-form .wpcf7-form label {
+.contact-form .wpcf7-form label,
+.contact-form .fluentform .ff-el-input--label {
   display: block;
   font-size: 0.85rem;
   text-transform: uppercase;
@@ -849,14 +854,17 @@ header.scrolled .logo-img { height: 40px; }
 .contact-form .wpcf7-form input[type="text"],
 .contact-form .wpcf7-form input[type="email"],
 .contact-form .wpcf7-form textarea,
+.contact-form .fluentform input[type="text"],
+.contact-form .fluentform input[type="email"],
+.contact-form .fluentform textarea,
 .contact-form input,
 .contact-form textarea {
   width: 100%;
   padding: 0.8rem 1rem;
-  background: rgba(25, 25, 27, 0.5);
-  border: 1px solid var(--border-glass);
-  border-radius: 6px;
-  color: var(--text-primary);
+  background: rgba(25, 25, 27, 0.5) !important;
+  border: 1px solid var(--border-glass) !important;
+  border-radius: 6px !important;
+  color: var(--text-primary) !important;
   font-family: inherit;
   font-size: 0.95rem;
   transition: var(--transition-fast);
@@ -864,36 +872,46 @@ header.scrolled .logo-img { height: 40px; }
 
 .contact-form .form-control:focus,
 .contact-form input:focus,
-.contact-form textarea:focus {
-  outline: none;
-  border-color: var(--color-gold);
-  box-shadow: 0 0 10px rgba(255, 215, 0, 0.1);
-  background: rgba(25, 25, 27, 0.8);
+.contact-form textarea:focus,
+.contact-form .fluentform input:focus,
+.contact-form .fluentform textarea:focus {
+  outline: none !important;
+  border-color: var(--color-gold) !important;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.1) !important;
+  background: rgba(25, 25, 27, 0.8) !important;
 }
 
-.contact-form textarea { resize: vertical; min-height: 120px; }
+.contact-form textarea,
+.contact-form .fluentform textarea { 
+  resize: vertical; 
+  min-height: 120px; 
+}
 
-/* CF7 submit button */
+/* Submit button (CF7 & Fluent Forms & WPForms) */
 .contact-form .wpcf7-submit,
-.contact-form input[type="submit"] {
+.contact-form .fluentform button.ff-btn-submit,
+.contact-form input[type="submit"],
+.contact-form button[type="submit"] {
   width: 100%;
-  background: linear-gradient(135deg, var(--color-gold), var(--color-brass));
-  color: var(--text-dark);
-  border: none;
-  padding: 0.8rem 1.8rem;
-  border-radius: 6px;
-  font-size: 0.95rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
+  background: linear-gradient(135deg, var(--color-gold), var(--color-brass)) !important;
+  color: var(--text-dark) !important;
+  border: none !important;
+  padding: 0.8rem 1.8rem !important;
+  border-radius: 6px !important;
+  font-size: 0.95rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.05em !important;
   cursor: pointer;
-  transition: var(--transition-smooth);
-  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
+  transition: var(--transition-smooth) !important;
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2) !important;
 }
 
 .contact-form .wpcf7-submit:hover,
-.contact-form input[type="submit"]:hover {
+.contact-form .fluentform button.ff-btn-submit:hover,
+.contact-form input[type="submit"]:hover,
+.contact-form button[type="submit"]:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+  box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4) !important;
 }
 
 .wpcf7-response-output {

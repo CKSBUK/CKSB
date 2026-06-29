@@ -70,21 +70,24 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.addEventListener('click', (e) => {
       const instrument = e.currentTarget.getAttribute('data-instrument');
 
-      // CF7 field names (adjust if you rename them in CF7)
-      const cf7Subject = document.querySelector('.wpcf7-form input[name="your-subject"]');
-      const cf7Message = document.querySelector('.wpcf7-form textarea[name="your-message"]');
-
-      // Fallback plain form field names
-      const plainSubject = document.getElementById('subject');
-      const plainMessage = document.getElementById('message');
+      // Generic field selectors (works with CF7, Fluent Forms, WPForms, etc.)
+      const subjectFields = document.querySelectorAll('input[name*="subject"], input[name*="Subject"], #subject, input[name*="Subject"]');
+      const messageFields = document.querySelectorAll('textarea');
 
       const subjectValue = `Vacancy Application: ${instrument}`;
       const messageValue = `Hi Crosskeys Silver Band,\n\nI would like to apply for the ${instrument} vacancy. Here is a bit about my playing experience:\n\n[Add details here]`;
 
-      if (cf7Subject) cf7Subject.value = subjectValue;
-      if (cf7Message) cf7Message.value = messageValue;
-      if (plainSubject) plainSubject.value = subjectValue;
-      if (plainMessage) plainMessage.value = messageValue;
+      subjectFields.forEach(field => {
+        field.value = subjectValue;
+        field.dispatchEvent(new Event('input', { bubbles: true }));
+        field.dispatchEvent(new Event('change', { bubbles: true }));
+      });
+      
+      messageFields.forEach(field => {
+        field.value = messageValue;
+        field.dispatchEvent(new Event('input', { bubbles: true }));
+        field.dispatchEvent(new Event('change', { bubbles: true }));
+      });
     });
   });
 

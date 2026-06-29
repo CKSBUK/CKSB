@@ -20,6 +20,7 @@
 get_header();
 
 // ── Customizer values ──────────────────────────────────────────────────────────
+$hero_bg    = get_theme_mod( 'crosskeys_hero_bg', '' );
 $hero_pre   = get_theme_mod( 'crosskeys_hero_pre',   'Established 1901' );
 $hero_title = get_theme_mod( 'crosskeys_hero_title', 'Making Music in South Wales for over a Century' );
 $hero_desc  = get_theme_mod( 'crosskeys_hero_desc',  'Crosskeys Silver Band is a historic, community-focused brass band dedicated to musical excellence, performance, and preserving our Welsh brass heritage.' );
@@ -69,25 +70,16 @@ $conductor_content = $conductor_page
 <p>Dave brings a rich combination of artistic caliber and structured training, maintaining the band\'s historic standards of excellence while introducing exciting and challenging repertoire to our rehearsal room.</p>';
 ?>
 
-<?php if ( current_user_can( 'manage_options' ) ) :
-  $debug_about     = crosskeys_get_page( 'about' );
-  $debug_conductor = crosskeys_get_page( 'conductor' );
-  $icon_ok  = '✅';
-  $icon_err = '❌';
-?>
-<div style="position:fixed; bottom:1rem; right:1rem; z-index:9999; background:#121214; border:1px solid rgba(255,215,0,0.3); border-radius:8px; padding:1rem 1.5rem; font-family:monospace; font-size:0.8rem; color:#a1a1a6; max-width:340px;">
-  <strong style="color:#ffd700; display:block; margin-bottom:0.5rem;">🛠 Admin — Page Source Debug</strong>
-  <div><?php echo $debug_about ? $icon_ok . ' <strong style="color:#f5f5f7">About</strong> found (ID: ' . $debug_about->ID . ')' : $icon_err . ' <strong style="color:#ff4757">About</strong> NOT found — check slug is exactly <code>about</code> and status is Published'; ?></div>
-  <div style="margin-top:0.4rem"><?php echo $debug_conductor ? $icon_ok . ' <strong style="color:#f5f5f7">Conductor</strong> found (ID: ' . $debug_conductor->ID . ')' : $icon_err . ' <strong style="color:#ff4757">Conductor</strong> NOT found — check slug is exactly <code>conductor</code> and status is Published'; ?></div>
-  <div style="margin-top:0.6rem; font-size:0.75rem; color:#666;">Visible to admins only. Dismiss once working.</div>
-</div>
-<?php endif; ?>
 
 <!-- ════════════════════════════════════
      HERO SECTION
      ════════════════════════════════════ -->
 <section class="hero" id="home">
-  <div class="hero-bg" style="background-image: linear-gradient(to bottom, rgba(10,10,11,0.55), var(--bg-primary)), url('<?php echo esc_url( get_template_directory_uri() ); ?>/images/hero-bg.jpg');"></div>
+  <?php if ( $hero_bg ) : ?>
+    <div class="hero-bg" style="background-image: linear-gradient(to bottom, rgba(10,10,11,0.55), var(--bg-primary)), url('<?php echo esc_url( $hero_bg ); ?>');"></div>
+  <?php else : ?>
+    <div class="hero-bg" style="background: radial-gradient(circle at center, rgba(30, 30, 34, 0.4) 0%, transparent 100%);"></div>
+  <?php endif; ?>
   <div class="hero-logo-glow"></div>
 
   <div class="hero-content">
@@ -369,8 +361,9 @@ if ( ! empty( $events ) ) :
 
     <div class="glass-card contact-form reveal">
       <?php
-      if ( function_exists( 'wpcf7' ) ) :
-        echo do_shortcode( '[contact-form-7 id="crosskeys-contact" title="Crosskeys Contact Form"]' );
+      $form_shortcode = get_theme_mod( 'crosskeys_contact_form_shortcode', '' );
+      if ( ! empty( $form_shortcode ) ) :
+        echo do_shortcode( $form_shortcode );
       else :
       ?>
         <form id="contact-form" action="mailto:secretary@crosskeysband.co.uk" method="post" enctype="text/plain">
@@ -392,7 +385,9 @@ if ( ! empty( $events ) ) :
           </div>
           <button type="submit" class="btn btn-primary" style="width:100%;" id="contact-submit-btn">Send Message</button>
           <p style="font-size:0.8rem; color:var(--text-secondary); margin-top:0.8rem; text-align:center;">
-            Install <strong>Contact Form 7</strong> + <strong>WP Mail SMTP</strong> for reliable email delivery.
+            <strong>Admin tip:</strong> Paste your Fluent Forms shortcode in<br>
+            <em>Appearance → Customize → Band Content → Contact Form</em><br>
+            to replace this basic mailto form.
           </p>
         </form>
       <?php endif; ?>

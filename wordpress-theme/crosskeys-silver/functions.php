@@ -30,7 +30,7 @@ function crosskeys_enqueue_assets() {
         'crosskeys-style',
         get_stylesheet_uri(),
         [],
-        '1.0.0'
+        filemtime( get_stylesheet_directory() . '/style.css' )
     );
 
     // FontAwesome
@@ -450,6 +450,8 @@ function crosskeys_customize_register( WP_Customize_Manager $wp_customize ) {
         'panel' => 'crosskeys_content',
     ] );
 
+    crosskeys_image_setting( $wp_customize, 'hero_bg', 'crosskeys_hero', __( 'Background Image', 'crosskeys-silver' ) );
+
     crosskeys_text_setting( $wp_customize, 'hero_pre',    'crosskeys_hero',
         __( 'Pre-Title (small gold text above heading)', 'crosskeys-silver' ),
         'Established 1901' );
@@ -494,6 +496,16 @@ function crosskeys_customize_register( WP_Customize_Manager $wp_customize ) {
     crosskeys_textarea_setting( $wp_customize, 'rehearsal_note', 'crosskeys_rehearsals',
         __( 'Additional Note', 'crosskeys-silver' ),
         'Our rehearsals take place in the dedicated bandroom at Pandy Park. Ample free parking is available on-site.' );
+
+    // ── CONTACT FORM ─────────────────────────────────────────────────────────
+    $wp_customize->add_section( 'crosskeys_contact', [
+        'title'       => __( 'Contact Form', 'crosskeys-silver' ),
+        'description' => __( 'Paste the shortcode for your preferred contact form plugin (e.g. Fluent Forms, Contact Form 7, WPForms).', 'crosskeys-silver' ),
+        'panel'       => 'crosskeys_content',
+    ] );
+
+    crosskeys_text_setting( $wp_customize, 'contact_form_shortcode', 'crosskeys_contact',
+        __( 'Form Shortcode', 'crosskeys-silver' ), '' );
 }
 add_action( 'customize_register', 'crosskeys_customize_register' );
 
@@ -522,4 +534,16 @@ function crosskeys_textarea_setting( $wpc, $id, $section, $label, $default = '' 
         'section' => $section,
         'type'    => 'textarea',
     ] );
+}
+
+function crosskeys_image_setting( $wpc, $id, $section, $label ) {
+    $wpc->add_setting( 'crosskeys_' . $id, [
+        'default'           => '',
+        'sanitize_callback' => 'esc_url_raw',
+        'transport'         => 'refresh',
+    ] );
+    $wpc->add_control( new WP_Customize_Image_Control( $wpc, 'crosskeys_' . $id, [
+        'label'   => $label,
+        'section' => $section,
+    ] ) );
 }
