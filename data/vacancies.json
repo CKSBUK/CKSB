@@ -1,16 +1,15 @@
 [
   {
-    "id": 1,
-    "instrument": "Solo Cornet",
-    "section": "Cornets",
-    "description": "We are seeking a talented Solo Cornet player to join our front row. Rehearsals are on Tuesday evenings from 7:30pm to 9:30pm.",
-    "dateAdded": "2026-06-29"
-  },
-  {
     "id": 3,
     "instrument": "Tenor Horn",
     "section": "Horns",
     "description": "Experienced player needed for active section",
     "dateAdded": "2026-06-29"
+  },
+  {
+    "instrument": "Solo Euphonium",
+    "section": "Baritones & Euphoniums",
+    "dateAdded": "2026-06-29",
+    "description": "We're looking for a talented euphonium player to lead a strong section for an impressive array of concerts and contests."
   }
 ]
