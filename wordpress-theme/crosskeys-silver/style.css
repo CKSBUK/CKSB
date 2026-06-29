@@ -1,45 +1,62 @@
-/* 
-   Crosskeys Silver Band - Main Stylesheet
-   Theme: Modern Sleek with Historic Brass Band Roots
-   Colors: Deep Charcoal, Metallic Brass, Gold, and Warm Amber Glow
+/*
+Theme Name:        Crosskeys Silver Band
+Theme URI:         https://crosskeysband.co.uk
+Author:            Crosskeys Silver Band Committee
+Author URI:        https://crosskeysband.co.uk
+Description:       Custom theme for the Crosskeys Silver Band website. Dark gold premium design with animated sections, Custom Post Type vacancies, and Contact Form 7 integration.
+Version:           1.0.0
+Requires at least: 6.0
+Tested up to:      6.7
+Requires PHP:      8.0
+License:           GNU General Public License v2 or later
+License URI:       http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain:       crosskeys-silver
+Tags:              custom-background, custom-logo, one-page, accessibility-ready
 */
 
+/* =====================================================
+   Crosskeys Silver Band — Main Stylesheet
+   Theme: Modern Sleek with Historic Brass Band Roots
+   Palette: Deep Charcoal · Metallic Brass · Gold · Amber
+   ===================================================== */
+
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600;700&display=swap');
+/* FontAwesome is loaded via a direct <link> tag in header.php */
 
 :root {
   --bg-primary: #0a0a0b;
   --bg-secondary: #121214;
   --bg-glass: rgba(18, 18, 20, 0.7);
   --bg-glass-heavy: rgba(10, 10, 11, 0.85);
-  
+
   /* Gold and Brass Accents */
   --color-gold: #ffd700;
   --color-gold-rgb: 255, 215, 0;
   --color-brass: #d4af37;
   --color-brass-dark: #b8860b;
   --color-accent-glow: rgba(212, 175, 55, 0.15);
-  
+
   /* Text Colors */
   --text-primary: #f5f5f7;
   --text-secondary: #a1a1a6;
   --text-dark: #121214;
-  
+
   /* Borders and Shadows */
   --border-glass: rgba(212, 175, 55, 0.12);
   --border-glass-hover: rgba(212, 175, 55, 0.3);
   --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
   --shadow-gold: 0 0 25px rgba(255, 215, 0, 0.15);
-  
+
   /* Transitions */
   --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   --transition-fast: all 0.2s ease;
-  
+
   /* Layout */
   --max-width: 1200px;
 }
 
-/* Base resets & styles */
+/* ── Base resets ── */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -71,9 +88,7 @@ a {
   transition: var(--transition-fast);
 }
 
-ul {
-  list-style: none;
-}
+ul { list-style: none; }
 
 img {
   max-width: 100%;
@@ -81,7 +96,7 @@ img {
   display: block;
 }
 
-/* Utilities */
+/* ── Utilities ── */
 .container {
   width: 90%;
   max-width: var(--max-width);
@@ -89,9 +104,7 @@ img {
   padding: 80px 0;
 }
 
-.text-center {
-  text-align: center;
-}
+.text-center { text-align: center; }
 
 .accent-text {
   color: var(--color-gold);
@@ -127,7 +140,7 @@ img {
   font-weight: 300;
 }
 
-/* Glassmorphism card default */
+/* Glassmorphism card */
 .glass-card {
   background: var(--bg-glass);
   backdrop-filter: blur(12px);
@@ -146,25 +159,20 @@ img {
 }
 
 /* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
-}
-::-webkit-scrollbar-track {
-  background: var(--bg-primary);
-}
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
 ::-webkit-scrollbar-thumb {
   background: var(--bg-secondary);
   border: 2px solid var(--bg-primary);
   border-radius: 5px;
 }
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-brass);
-}
+::-webkit-scrollbar-thumb:hover { background: var(--color-brass); }
 
-/* ==========================================
+/* ==============================================
    Header & Navigation
-   ========================================== */
-header {
+   ============================================== */
+header,
+#main-header {
   position: fixed;
   top: 0;
   left: 0;
@@ -174,7 +182,8 @@ header {
   padding: 1.5rem 0;
 }
 
-header.scrolled {
+header.scrolled,
+#main-header.scrolled {
   background: var(--bg-glass-heavy);
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
@@ -204,9 +213,7 @@ header.scrolled {
   transition: var(--transition-smooth);
 }
 
-header.scrolled .logo-img {
-  height: 40px;
-}
+header.scrolled .logo-img { height: 40px; }
 
 .logo-text {
   font-size: 1.1rem;
@@ -236,7 +243,9 @@ header.scrolled .logo-img {
   color: var(--text-secondary);
 }
 
-.nav-links a:hover, .nav-links a.active {
+.nav-links a:hover,
+.nav-links a.active,
+.nav-links a.current-menu-item {
   color: var(--text-primary);
 }
 
@@ -251,7 +260,9 @@ header.scrolled .logo-img {
   transition: var(--transition-fast);
 }
 
-.nav-links a:hover::after, .nav-links a.active::after {
+.nav-links a:hover::after,
+.nav-links a.active::after,
+.nav-links a.current-menu-item::after {
   width: 100%;
 }
 
@@ -284,19 +295,11 @@ header.scrolled .logo-img {
 }
 
 .hamburger::before { top: -6px; }
-.hamburger::after { top: 6px; }
+.hamburger::after  { top: 6px; }
 
-.nav-toggle.open .hamburger {
-  background: transparent;
-}
-.nav-toggle.open .hamburger::before {
-  transform: rotate(45deg);
-  top: 0;
-}
-.nav-toggle.open .hamburger::after {
-  transform: rotate(-45deg);
-  top: 0;
-}
+.nav-toggle.open .hamburger { background: transparent; }
+.nav-toggle.open .hamburger::before { transform: rotate(45deg);  top: 0; }
+.nav-toggle.open .hamburger::after  { transform: rotate(-45deg); top: 0; }
 
 /* Buttons */
 .btn {
@@ -308,18 +311,19 @@ header.scrolled .logo-img {
   letter-spacing: 0.05em;
   cursor: pointer;
   transition: var(--transition-smooth);
+  border: none;
 }
 
 .btn-primary {
   background: linear-gradient(135deg, var(--color-gold), var(--color-brass));
   color: var(--text-dark);
-  border: none;
   box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+  color: var(--text-dark);
 }
 
 .btn-outline {
@@ -334,9 +338,14 @@ header.scrolled .logo-img {
   transform: translateY(-2px);
 }
 
-/* ==========================================
+.btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+}
+
+/* ==============================================
    Hero Section
-   ========================================== */
+   ============================================== */
 .hero {
   height: 100vh;
   min-height: 600px;
@@ -350,12 +359,9 @@ header.scrolled .logo-img {
 
 .hero-bg {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
   z-index: -1;
-  background-image: linear-gradient(to bottom, rgba(10, 10, 11, 0.55), var(--bg-primary)), url('../Media/cropped-484977737_9369944099749898_6762681047931524330_n.jpg');
   background-size: cover;
   background-position: center;
   opacity: 0.5;
@@ -363,15 +369,14 @@ header.scrolled .logo-img {
 
 .hero-logo-glow {
   position: absolute;
-  width: 400px;
-  height: 400px;
+  width: 400px; height: 400px;
   background: radial-gradient(circle, rgba(255, 215, 0, 0.06) 0%, transparent 70%);
   z-index: -1;
   animation: pulse 8s ease-in-out infinite alternate;
 }
 
 @keyframes pulse {
-  0% { transform: scale(1); opacity: 0.6; }
+  0%   { transform: scale(1);    opacity: 0.6; }
   100% { transform: scale(1.15); opacity: 0.9; }
 }
 
@@ -399,9 +404,7 @@ header.scrolled .logo-img {
 }
 
 @media (max-width: 768px) {
-  .hero-title {
-    font-size: 2.5rem;
-  }
+  .hero-title { font-size: 2.5rem; }
 }
 
 .hero-desc {
@@ -424,9 +427,9 @@ header.scrolled .logo-img {
   }
 }
 
-/* ==========================================
+/* ==============================================
    About / History Section
-   ========================================== */
+   ============================================== */
 .about-grid {
   display: grid;
   grid-template-columns: 1.2fr 0.8fr;
@@ -477,12 +480,12 @@ header.scrolled .logo-img {
   margin-top: 0.2rem;
 }
 
-/* ==========================================
+/* ==============================================
    Conductor Section
-   ========================================== */
+   ============================================== */
 .conductor-bg {
   background: var(--bg-secondary);
-  border-top: 1px solid rgba(255, 215, 0, 0.03);
+  border-top:    1px solid rgba(255, 215, 0, 0.03);
   border-bottom: 1px solid rgba(255, 215, 0, 0.03);
 }
 
@@ -500,9 +503,7 @@ header.scrolled .logo-img {
   }
 }
 
-.conductor-img-container {
-  position: relative;
-}
+.conductor-img-container { position: relative; }
 
 .conductor-frame {
   position: relative;
@@ -514,29 +515,19 @@ header.scrolled .logo-img {
 .conductor-frame::after {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
   background: linear-gradient(to top, rgba(10, 10, 11, 0.8) 0%, transparent 40%);
 }
 
 .conductor-deco-border {
   position: absolute;
-  top: -15px;
-  left: -15px;
-  right: 15px;
-  bottom: 15px;
+  top: -15px; left: -15px;
+  right: 15px; bottom: 15px;
   border: 2px solid var(--color-brass);
   border-radius: 12px;
   z-index: -1;
   pointer-events: none;
-}
-
-.conductor-bio h3 {
-  font-size: 1.8rem;
-  margin-bottom: 0.5rem;
-  font-weight: 600;
 }
 
 .conductor-role {
@@ -555,9 +546,112 @@ header.scrolled .logo-img {
   font-size: 1.05rem;
 }
 
-/* ==========================================
+/* ==============================================
+   Events Section
+   ============================================== */
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.event-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 1.5rem;
+  gap: 1.5rem;
+  position: relative;
+}
+
+@media (max-width: 600px) {
+  .event-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.event-date-block {
+  background: rgba(255, 215, 0, 0.1);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+  min-width: 90px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.event-month {
+  color: var(--color-gold);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+
+.event-day {
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1;
+  margin: 0.2rem 0;
+}
+
+.event-year {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.event-content {
+  flex-grow: 1;
+}
+
+.event-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.event-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.9rem;
+  color: var(--color-gold);
+  margin-bottom: 0.8rem;
+}
+
+.event-meta i {
+  margin-right: 0.3rem;
+}
+
+.event-desc {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin-bottom: 0;
+}
+
+.event-action {
+  flex-shrink: 0;
+}
+
+@media (max-width: 600px) {
+  .event-action {
+    width: 100%;
+  }
+  .event-action .btn {
+    width: 100%;
+  }
+}
+
+/* ==============================================
    Vacancies Section
-   ========================================== */
+   ============================================== */
 .vacancies-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 360px));
@@ -626,12 +720,10 @@ header.scrolled .logo-img {
   margin-bottom: 1.5rem;
 }
 
-/* ==========================================
+/* ==============================================
    Rehearsals & Find Us
-   ========================================== */
-.rehearsal-bg {
-  background: var(--bg-secondary);
-}
+   ============================================== */
+.rehearsal-bg { background: var(--bg-secondary); }
 
 .rehearsal-grid {
   display: grid;
@@ -653,9 +745,7 @@ header.scrolled .logo-img {
   padding-left: 1rem;
 }
 
-.rehearsal-time-card {
-  margin-bottom: 2rem;
-}
+.rehearsal-time-card { margin-bottom: 2rem; }
 
 .time-item {
   display: flex;
@@ -670,9 +760,7 @@ header.scrolled .logo-img {
   min-width: 90px;
 }
 
-.time-hours {
-  color: var(--text-secondary);
-}
+.time-hours { color: var(--text-secondary); }
 
 .map-wrapper {
   border-radius: 12px;
@@ -683,15 +771,14 @@ header.scrolled .logo-img {
 }
 
 .map-wrapper iframe {
-  width: 100%;
-  height: 100%;
+  width: 100%; height: 100%;
   border: none;
-  filter: grayscale(1) invert(0.92) contrast(1.1); /* Match dark theme */
+  filter: grayscale(1) invert(0.92) contrast(1.1);
 }
 
-/* ==========================================
+/* ==============================================
    Contact Section
-   ========================================== */
+   ============================================== */
 .contact-grid {
   display: grid;
   grid-template-columns: 0.9fr 1.1fr;
@@ -717,8 +804,7 @@ header.scrolled .logo-img {
 }
 
 .contact-icon {
-  width: 48px;
-  height: 48px;
+  width: 48px; height: 48px;
   background: var(--bg-secondary);
   border: 1px solid var(--border-glass);
   border-radius: 50%;
@@ -735,20 +821,21 @@ header.scrolled .logo-img {
   margin-bottom: 0.2rem;
 }
 
-.contact-item-content p, .contact-item-content a {
+.contact-item-content p,
+.contact-item-content a {
   color: var(--text-secondary);
 }
 
-.contact-item-content a:hover {
-  color: var(--color-gold);
-}
+.contact-item-content a:hover { color: var(--color-gold); }
 
-/* Form Styles */
-.contact-form .form-group {
+/* Contact Form 7 overrides */
+.contact-form .form-group,
+.contact-form .wpcf7-form p {
   margin-bottom: 1.5rem;
 }
 
-.contact-form label {
+.contact-form label,
+.contact-form .wpcf7-form label {
   display: block;
   font-size: 0.85rem;
   text-transform: uppercase;
@@ -758,7 +845,12 @@ header.scrolled .logo-img {
   font-weight: 500;
 }
 
-.contact-form .form-control {
+.contact-form .form-control,
+.contact-form .wpcf7-form input[type="text"],
+.contact-form .wpcf7-form input[type="email"],
+.contact-form .wpcf7-form textarea,
+.contact-form input,
+.contact-form textarea {
   width: 100%;
   padding: 0.8rem 1rem;
   background: rgba(25, 25, 27, 0.5);
@@ -770,43 +862,66 @@ header.scrolled .logo-img {
   transition: var(--transition-fast);
 }
 
-.contact-form .form-control:focus {
+.contact-form .form-control:focus,
+.contact-form input:focus,
+.contact-form textarea:focus {
   outline: none;
   border-color: var(--color-gold);
   box-shadow: 0 0 10px rgba(255, 215, 0, 0.1);
   background: rgba(25, 25, 27, 0.8);
 }
 
-.contact-form textarea.form-control {
-  resize: vertical;
-  min-height: 120px;
-}
+.contact-form textarea { resize: vertical; min-height: 120px; }
 
-.form-status {
-  margin-top: 1rem;
-  padding: 0.8rem;
+/* CF7 submit button */
+.contact-form .wpcf7-submit,
+.contact-form input[type="submit"] {
+  width: 100%;
+  background: linear-gradient(135deg, var(--color-gold), var(--color-brass));
+  color: var(--text-dark);
+  border: none;
+  padding: 0.8rem 1.8rem;
   border-radius: 6px;
-  font-size: 0.9rem;
-  display: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
 }
 
-.form-status.success {
-  display: block;
-  background: rgba(46, 213, 115, 0.1);
-  color: #2ed573;
-  border: 1px solid rgba(46, 213, 115, 0.2);
+.contact-form .wpcf7-submit:hover,
+.contact-form input[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
 }
 
-.form-status.error {
-  display: block;
-  background: rgba(255, 71, 87, 0.1);
-  color: #ff4757;
-  border: 1px solid rgba(255, 71, 87, 0.2);
+.wpcf7-response-output {
+  margin-top: 1rem !important;
+  padding: 0.8rem !important;
+  border-radius: 6px !important;
+  font-size: 0.9rem !important;
+  border: 1px solid var(--border-glass) !important;
+  background: rgba(255, 215, 0, 0.05) !important;
+  color: var(--text-secondary) !important;
 }
 
-/* ==========================================
-   Policies Page Style Elements
-   ========================================== */
+.wpcf7-mail-sent-ok {
+  background: rgba(46, 213, 115, 0.1) !important;
+  color: #2ed573 !important;
+  border-color: rgba(46, 213, 115, 0.2) !important;
+}
+
+.wpcf7-validation-errors,
+.wpcf7-mail-sent-ng {
+  background: rgba(255, 71, 87, 0.1) !important;
+  color: #ff4757 !important;
+  border-color: rgba(255, 71, 87, 0.2) !important;
+}
+
+/* ==============================================
+   Policies Page
+   ============================================== */
 .policies-hero {
   padding-top: 160px;
   padding-bottom: 60px;
@@ -855,110 +970,11 @@ header.scrolled .logo-img {
   margin-bottom: 1.5rem;
 }
 
-/* ==========================================
-   Admin Vacancies Page Style Elements
-   ========================================== */
-.admin-hero {
-  padding-top: 150px;
-  padding-bottom: 40px;
-  border-bottom: 1px solid rgba(255, 215, 0, 0.03);
-}
-
-.admin-grid {
-  display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 3rem;
-  align-items: start;
-}
-
-@media (max-width: 992px) {
-  .admin-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-.admin-list-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.5rem;
-}
-
-.admin-vacancies-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.admin-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-glass);
-  border-radius: 8px;
-  padding: 1rem 1.5rem;
-  transition: var(--transition-fast);
-}
-
-.admin-item:hover {
-  border-color: var(--border-glass-hover);
-}
-
-.admin-item-info h4 {
-  font-size: 1.1rem;
-  margin-bottom: 0.1rem;
-}
-
-.admin-item-info span {
-  font-size: 0.8rem;
-  color: var(--text-secondary);
-}
-
-.admin-item-actions {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.btn-icon {
-  background: transparent;
-  border: 1px solid var(--border-glass);
-  color: var(--text-primary);
-  width: 36px;
-  height: 36px;
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: var(--transition-fast);
-}
-
-.btn-icon:hover {
-  color: var(--color-gold);
-  border-color: var(--color-gold);
-  background: rgba(255, 215, 0, 0.05);
-}
-
-.btn-icon.btn-delete:hover {
-  color: #ff4757;
-  border-color: #ff4757;
-  background: rgba(255, 71, 87, 0.05);
-}
-
-.admin-actions-bar {
-  margin-top: 2rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--border-glass);
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-}
-
-/* ==========================================
+/* ==============================================
    Footer
-   ========================================== */
-footer {
+   ============================================== */
+footer,
+#main-footer {
   background: #060607;
   border-top: 1px solid var(--border-glass);
   padding: 50px 0 30px 0;
@@ -979,25 +995,17 @@ footer {
   }
 }
 
-.footer-info h4 {
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
-}
-
+.footer-info h4 { font-size: 1.2rem; margin-bottom: 1rem; }
 .footer-info p {
   color: var(--text-secondary);
   margin-bottom: 1.5rem;
   max-width: 320px;
 }
 
-.social-links {
-  display: flex;
-  gap: 1rem;
-}
+.social-links { display: flex; gap: 1rem; }
 
 .social-btn {
-  width: 40px;
-  height: 40px;
+  width: 40px; height: 40px;
   border-radius: 50%;
   background: var(--bg-secondary);
   border: 1px solid var(--border-glass);
@@ -1016,25 +1024,10 @@ footer {
   transform: translateY(-3px);
 }
 
-.footer-links h4 {
-  font-size: 1.1rem;
-  margin-bottom: 1rem;
-}
-
-.footer-links ul {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-}
-
-.footer-links a {
-  color: var(--text-secondary);
-}
-
-.footer-links a:hover {
-  color: var(--color-gold);
-  padding-left: 4px;
-}
+.footer-links h4 { font-size: 1.1rem; margin-bottom: 1rem; }
+.footer-links ul { display: flex; flex-direction: column; gap: 0.8rem; }
+.footer-links a { color: var(--text-secondary); }
+.footer-links a:hover { color: var(--color-gold); padding-left: 4px; }
 
 .footer-bottom {
   text-align: center;
@@ -1044,7 +1037,9 @@ footer {
   font-size: 0.85rem;
 }
 
-/* Scroll Animation classes */
+/* ==============================================
+   Scroll Reveal Animation
+   ============================================== */
 .reveal {
   opacity: 0;
   transform: translateY(30px);
@@ -1054,4 +1049,33 @@ footer {
 .reveal.active {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* ==============================================
+   Mobile Navigation (responsive)
+   ============================================== */
+@media (max-width: 768px) {
+  .nav-toggle { display: block; }
+
+  .nav-links {
+    position: fixed;
+    top: 0; right: 0;
+    height: 100vh;
+    width: 280px;
+    background: var(--bg-glass-heavy);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 2rem;
+    gap: 2.5rem;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    border-left: 1px solid var(--border-glass);
+  }
+
+  .nav-links.open { transform: translateX(0); }
+
+  .nav-links a { font-size: 1.2rem; }
 }
